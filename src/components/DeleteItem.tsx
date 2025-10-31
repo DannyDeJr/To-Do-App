@@ -1,8 +1,8 @@
 
 
-const DeleteItem = ({ taskid, delTask }) => {
+const DeleteItem = ({ taskId, delTask }) => {
   const handleDelete = () => {
-    delTask(taskid);
+    delTask(taskId);
   };
 
   return (

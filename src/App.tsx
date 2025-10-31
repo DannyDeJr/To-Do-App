@@ -23,9 +23,9 @@ function App() {
     // the spread operator ()...) is used to create a new array with existing tasks and the new task
     setTasks([...tasks, newTask])
   }
-  const toggleComplete = (taskid: number) => {
+  const toggleComplete = (taskId: number) => {
     const updTasks = tasks.map((task) => {
-      if (task.id === taskid) {
+      if (task.id === taskId) {
         return { ...task, completed: !task.completed }
       }
       return task
@@ -33,9 +33,9 @@ function App() {
     setTasks(updTasks)
   }
 
-  const deleteTask = (taskid: number) => {
+  const deleteTask = (taskId: number) => {
     const updTasks = tasks.filter((task) =>{
-      return task.id !== taskid
+      return task.id !== taskId
     })
     setTasks(updTasks)
   }
@@ -50,7 +50,7 @@ function App() {
           </div>
           <div>
             <select name="filter" id="filterList" className="bg-stone-400 p-2 rounded-full border-stone-700 border-3 hover:bg-stone-200 text-wite cursor-pointer">
-              <option value="all">ALL</option>
+              <option defaultValue="all">ALL</option>
               <option value="done">YA DONE</option>
               <option value="unfinished">YA NEED TO COMPLETE</option>
             </select>
@@ -63,7 +63,8 @@ function App() {
           {/* iterate over all the elements of the array and pass them to the child component */
             tasks.map((task) => (
               <ListItem key={task.id} task={task}
-              delTask={deleteTask} />
+              delTask={deleteTask} toggleComplete=
+              {toggleComplete} />
             ))}
         </div>
 

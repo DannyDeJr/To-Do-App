@@ -15,9 +15,9 @@ const AddTask = ({ addNewTask }) => {
             <form>
                 <div>
                     <label htmlFor="task" className="block mb-2 text-xl font-medium text-gray-300 dark:text-black">Task</label>
-                    <input type="text" id="task" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    <input type="text" id="task" className="bg-white-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2 cursor-pointer dark:bg-stone-200 dark:border-blue-400 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
-                <div className="border-blue-400 border-2 w-32 p-2 text-center rounded-lg hover:bg-blue-400 hover:text-white">
+                <div className="bg-blue-300 border-blue-400 border-2 w-32 p-2 text-center rounded-lg hover:bg-stone-300 hover:text-black">
                     <button className="cursor-pointer" type="submit" onClick={handleSubmit}>Add New Task</button>
                 </div>
             </form>

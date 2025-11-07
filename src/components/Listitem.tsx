@@ -1,8 +1,9 @@
 import { format } from "date-and-time";
 import DeleteItem from "./DeleteItem";
 import TaskStatus from "./TaskStatus";
+import EditItem from "./EditItem";
 
-const ListItem = ({ task,delTask, toggleComplete }) => {
+const ListItem = ({ task,delTask, toggleComplete, setEdit }) => {
     return (
         <div className="bg-white my-3 p-4 rounded-lg flex justify-between">
             <div className="flex">
@@ -14,7 +15,7 @@ const ListItem = ({ task,delTask, toggleComplete }) => {
             </div>
             <div>
                 <DeleteItem taskId={task.id} delTask={delTask}/>
-                <i className="fa-solid fa-pen cursor-pointer text-xl relative top-3 mx-2"></i>
+                <EditItem taskId={task.id} taskDetails={task.task} setEdit={setEdit} />
             </div>
         </div>
     )

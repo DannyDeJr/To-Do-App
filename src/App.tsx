@@ -1,7 +1,7 @@
 import AddTask from "./components/AddTask"
 import EditTask from "./components/EditTask"
 import ListItem from "./components/ListItem"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
 
@@ -12,6 +12,7 @@ function App() {
     completed: false,
     createdOn: new Date()
   },])
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const [taskToEdit, setTaskToEdit] = useState({
     id: 0,
     task: "",
@@ -24,9 +25,33 @@ function App() {
       completed: false,
       createdOn: new Date()
     }
+
     // the spread operator ()...) is used to create a new array with existing tasks and the new task
     setTasks([...tasks, newTask])
   }
+  const [filter, setFilter] = useState<number>(0)
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(Number(e.target.value));
+  }
+  useEffect(() => {
+    filterTasks();
+  }, [filter, tasks]);
+
+  const filterTasks = () => {
+    switch (filter) {
+      case 1:
+        setFilteredTasks(tasks.filter((task) => task.completed === true));
+        break;
+      case 2:
+        setFilteredTasks(tasks.filter((task) => task.completed === false));
+        break;
+      default:
+        setFilteredTasks(tasks);
+    }
+  }
+const [showAddTask, setShowAddTask] = useState(false);
+const [showEditTask, setShowEditTask] = useState(false);
   const toggleComplete = (taskId: number) => {
     const updTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -51,10 +76,7 @@ function App() {
     })
     setTasks(updTasks)
   }
-  // // const editTask = (taskId: number, newDetails: string) => {
-  //   const updTasks = tasks.map((task) => {
-  //     if (task.id === taskId) {
-
+  
   return (
     <div className="h-screen w-screen flex justify-center bg-stone-100">
       <div className="flex flex-col items-center m-24 w-3xl">
@@ -64,10 +86,10 @@ function App() {
             <button className="bg-white p-2 rounded-full border-blue-400 border-2 hover:bg-blue-400 hover:text-white cursor-pointer">ADD TASK</button>
           </div>
           <div>
-            <select name="filter" id="filterList" className="bg-stone-400 p-2 rounded-full border-stone-700 border-3 hover:bg-stone-200 text-wite cursor-pointer">
-              <option defaultValue="all">ALL</option>
-              <option value="done">YA DONE</option>
-              <option value="unfinished">YA NEED TO COMPLETE</option>
+            <select onChange={handleFilterChange} name="filter" id="filterList" className="bg-stone-400 p-2 rounded-full border-stone-700 border-3 hover:bg-stone-200 text-wite cursor-pointer">
+              <option defaultValue="0" value="0">ALL</option>
+              <option value="1">YA DONE</option>
+              <option value="2">YA NEED TO COMPLETE</option>
             </select>
           </div>
         </div>
@@ -78,7 +100,7 @@ function App() {
          />
         <div className="bg-slate-300 w-full rounded-4xl mt-4 px-8 py-6">
           {/* iterate over all the elements of the array and pass them to the child component */
-            tasks.map((task) => (
+            filteredTasks.map((task) => (
               <ListItem key={task.id} task={task}
               delTask={deleteTask} 
               toggleComplete={toggleComplete} setEdit={setTaskToEdit} />

@@ -1,5 +1,5 @@
 // destructuring props directly in the function parameters
-const AddTask = ({ addNewTask }) => {
+const AddTask = ({ addNewTask, showAddTask, showAddTaskComponent }) => {
     // the e parameter represents the event object
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -8,6 +8,11 @@ const AddTask = ({ addNewTask }) => {
             return
         addNewTask(e.currentTarget.form.task.value)
         e.currentTarget.form.task.value = ""
+    }
+    const handleCancel = (e) => {
+        e.preventDefault()
+        e.currentTarget.form.task.value = ""
+        showAddTaskComponent(!showAddTask)
     }
 
     return (
